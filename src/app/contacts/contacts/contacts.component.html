@@ -1,0 +1,56 @@
+<h2>{{ header }}</h2>
+<p>{{ description | uppercase }}</p>
+<p>
+  You have
+  <mark [class]="counterClass">{{ numContacts }}</mark>
+  contacts right now.
+</p>
+
+<input value="Agregar contacto" type="button" (click)="AgregarContacto()" />
+<form [ngClass]="{ 'hidden' : formHidden }">
+  <section>
+    <label for="name">Name</label>
+    <input name="name" type="text" [(ngModel)]="contact.name" placeholder="Contact name" />
+  </section>
+  <section>
+    <label for="isVIP">Is V.I.P.</label>
+    <input name="isVIP" type="checkbox" [(ngModel)]="contact.isVIP" />
+  </section>
+  <section>
+    <label for="gender">Genero</label>
+    <input name="gender" value="male" type="radio" [(ngModel)]="contact.gender" />
+    <i>Hombre</i>
+    <input name="gender" value="female" type="radio" [(ngModel)]="contact.gender" />
+    <i>Mujer</i>
+  </section>
+  <section>
+    <label for="workStatus">Work Status</label>
+    <select name="workStatus" [(ngModel)]="contact.workStatus">
+      <option *ngFor="let wkSt of workStatuses" [value]="wkSt.id">
+        <span>{{ wkSt.description }}</span>
+      </option>
+    </select>
+  </section>
+  <section *ngIf="contact.workStatus=='3'; else education">
+    <label for="company">Company Name</label>
+    <input name="company" type="text" [(ngModel)]="contact.companyName" />
+  </section>
+  <ng-template #education>
+    <section>
+      <label for="education">Education</label>
+      <input name="education" type="text" [(ngModel)]="contact.education"/>
+    </section>
+  </ng-template>
+  <input value="Guardar" type="submit" class='btn btn-primary' (click)="saveContact()" />
+</form>
+
+<pre>{{ contact | json }}</pre>
+
+<ul *ngIf="contacts.length>0; else empty">
+  <li *ngFor="let contact of contacts">
+    <span>{{ contact.name }}</span>
+    <input value="Delete" type="button" (click)="deleteContact(contact)" />
+    <input value="Editar" type="button" (click)="editContact(contact)" />
+  </li>
+</ul>
+<ng-template #empty> <i>No data yet</i> </ng-template>
