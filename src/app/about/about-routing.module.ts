@@ -24,7 +24,7 @@ const routes: Routes = [
         path: 'authors', component: AuthorsComponent
       },
       {
-        path: 'authors:id', component: AuthorComponent
+        path: 'authors/:id', component: AuthorComponent
       }
     ]
   }
