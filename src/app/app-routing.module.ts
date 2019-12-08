@@ -22,8 +22,19 @@ const routes: Routes = [
     component: HeroesComponent
   },
   {
+    path: 'rates',
+    loadChildren: () => import('./http/rates/rates.module').then(m => m.RatesModule)
+  },
+  {
+    path: 'security',
+    loadChildren: () => import('./security/security.module').then(m => m.SecurityModule)
+  },
+  {
     path: 'car',
     loadChildren: () => import('./4-flow/car/car.module').then(m => m.CarModule)
+  },{
+    path:'localidad',
+    loadChildren: () => import('./localidad/localidad.module').then(m => m.LocalidadModule)
   },
   {
     path: 'not-found',
