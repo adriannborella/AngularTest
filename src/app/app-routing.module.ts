@@ -22,6 +22,10 @@ const routes: Routes = [
     component: HeroesComponent
   },
   {
+    path: 'car',
+    loadChildren: () => import('./4-flow/car/car.module').then(m => m.CarModule)
+  },
+  {
     path: 'not-found',
     component: NotFoundComponent
   },
